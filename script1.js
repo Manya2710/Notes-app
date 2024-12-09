@@ -6,17 +6,17 @@ const addBox = document.querySelector(".add-box"),
   descTag = popupBox.querySelector("textarea"),
   addBtn = popupBox.querySelector("button");
 
-// Array of month names
+
 const months = ["January", "February", "March", "April", "May", "June", "July",
   "August", "September", "October", "November", "December"];
 
-// Retrieve notes from localStorage or initialize an empty array
+
 const notes = JSON.parse(localStorage.getItem("notes") || "[]");
 
-// Flags and ID for note updates
+
 let isUpdate = false, updateId;
 
-// Open the popup box to add a new note
+
 addBox.addEventListener("click", () => {
   popupTitle.innerText = "Add a new Note";
   addBtn.innerText = "Add Note";
@@ -25,7 +25,7 @@ addBox.addEventListener("click", () => {
   if (window.innerWidth > 660) titleTag.focus();
 });
 
-// Close the popup box and reset fields
+
 closeIcon.addEventListener("click", () => {
   isUpdate = false;
   titleTag.value = descTag.value = "";
@@ -33,7 +33,7 @@ closeIcon.addEventListener("click", () => {
   document.querySelector("body").style.overflow = "auto";
 });
 
-// Display existing notes from localStorage
+
 function showNotes() {
   if (!notes) return;
   document.querySelectorAll(".note").forEach(li => li.remove());
@@ -61,7 +61,6 @@ function showNotes() {
 
 showNotes();
 
-// Show menu options for each note
 function showMenu(elem) {
   elem.parentElement.classList.add("show");
   document.addEventListener("click", e => {
@@ -71,7 +70,6 @@ function showMenu(elem) {
   });
 }
 
-// Delete a specific note
 function deleteNote(noteId) {
   let confirmDel = confirm("Are you sure you want to delete this note?");
   if (!confirmDel) return;
@@ -80,7 +78,6 @@ function deleteNote(noteId) {
   showNotes();
 }
 
-// Update a specific note
 function updateNote(noteId, title, filterDesc) {
   let description = filterDesc.replaceAll('<br/>', '\r\n');
   updateId = noteId;
@@ -91,8 +88,6 @@ function updateNote(noteId, title, filterDesc) {
   popupTitle.innerText = "Update a Note";
   addBtn.innerText = "Update Note";
 }
-
-// Add or update a note on button click
 addBtn.addEventListener("click", e => {
   e.preventDefault();
   let title = titleTag.value.trim(),
